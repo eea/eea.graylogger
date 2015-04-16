@@ -1,0 +1,12 @@
+<component prefix="eea.graylogger.datatypes">
+
+  <sectiontype name="graylog"
+               implements="ZConfig.logger.handler"
+               datatype=".GELFLoggerHandlerFactory"
+               extends="ZConfig.logger.base-log-handler">
+    <key name="server" default="localhost" datatype="inet-address"/>
+    <key name="format" default="%(message)s"
+         datatype="ZConfig.components.logger.handlers.log_format"/>
+  </sectiontype>
+
+</component>
