@@ -50,6 +50,40 @@ Getting started
 2. Restart Zope
 3. Go to http://localhost:9000 to see your Zope logs
 
+Configuration parameters
+========================
+
+* **rabbit** - True if you want to use GELFRabbitHandler instead of GELFHandler.
+  See `graypy`_ documentation for more details.
+
+GELFHandler
+-----------
+
+* **server** - the host[:port] of the graylog server.
+* **chunk_size** - message chunk size. messages larger than this size will be sent
+  to graylog in multiple chunks (default 1420).
+* **debugging_fields** - send debug fields if true (the default).
+* **extra_fields** - send extra fields on the log record to graylog if true (the default).
+* **fqdn** - use fully qualified domain name of localhost as source host (socket.getfqdn()).
+* **localname** - use specified hostname as source host.
+* **facility** - replace facility with specified value. if specified, record.name
+  will be passed as logger parameter.
+
+GELFRabbitHandler
+-----------------
+
+* **server** - RabbitMQ URL (ex: amqp://guest:guest@localhost:5672/%2F).
+* **exchange** - RabbitMQ exchange. Default ‘logging.gelf’. A queue binding must
+  be defined on the server to prevent log messages from being dropped.
+* **debugging_fields** - send debug fields if true (the default).
+* **extra_fields** - send extra fields on the log record to graylog if true (the default).
+* **fqdn** - use fully qualified domain name of localhost as source host - socket.getfqdn().
+* **exchange_type** - RabbitMQ exchange type (default fanout).
+* **localname** - use specified hostname as source host.
+* **facility** - replace facility with specified value. if specified, record.name
+  will be passed as logger parameter.
+
+
 Dependencies
 ============
 
@@ -82,7 +116,8 @@ Funding
 
 EEA_ - European Environment Agency (EU)
 
-.. _EEA: http://www.eea.europa.eu/
-.. _Graylog: https://www.graylog.org
-.. _graypy: https://pypi.python.org/pypi/graypy
+.. _`EEA`: http://www.eea.europa.eu/
+.. _`Graylog`: https://www.graylog.org
+.. _`graypy`: https://pypi.python.org/pypi/graypy
 .. _`Graylog2 Docker image`: https://github.com/eea/eea.docker.graylog2
+.. _`eea.graylogger`: https://github.com/eea/eea.graylogger
