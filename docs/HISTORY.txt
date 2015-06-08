@@ -3,8 +3,11 @@ Changelog
 
 1.1.dev0 - (unreleased)
 -----------------------
+* Bug fix: Added hard dependency to amqplib in order to fix GELFRabbitHandler
+  [voineali refs #21610]
 
 1.0 - (2015-05-05)
 ------------------
-- Initial release
+* Initial release
+  [voineali]
 
