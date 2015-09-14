@@ -8,8 +8,11 @@ from ZConfig.components.logger.handlers import HandlerFactory
 
 
 class EEAGELFHandler(graypy.GELFHandler):
+    """ Graylog Extended Log Format handler """
 
     def makePickle(self, record):
+        """ prepare message dict """
+
         message_dict = graypy.handlers.make_message_dict(
             record, self.debugging_fields, self.extra_fields, self.fqdn,
             self.localname, self.facility)
@@ -22,11 +25,14 @@ class EEAGELFHandler(graypy.GELFHandler):
 
 
 class EEAGELFRabbitHandler(graypy.GELFRabbitHandler):
+    """ RabbitMQ / Graylog Extended Log Format handler """
 
     def makePickle(self, record):
+        """ prepare message dict """
+        
         message_dict = graypy.handlers.make_message_dict(
-            record, self.debugging_fields, self.extra_fields, self.fqdn, self.localname,
-            self.facility)
+            record, self.debugging_fields, self.extra_fields, self.fqdn,
+            self.localname, self.facility)
 
         instance_home = os.environ.get('INSTANCE_HOME', '')
         if instance_home:
