@@ -13,7 +13,7 @@ class EEAGELFHandler(graypy.GELFHandler):
     def makePickle(self, record):
         """ prepare message dict """
 
-        message_dict = graypy.handlers.make_message_dict(
+        message_dict = graypy.handler.make_message_dict(
             record, self.debugging_fields, self.extra_fields, self.fqdn,
             self.localname, self.facility)
 
@@ -30,7 +30,7 @@ class EEAGELFRabbitHandler(graypy.GELFRabbitHandler):
     def makePickle(self, record):
         """ prepare message dict """
         
-        message_dict = graypy.handlers.make_message_dict(
+        message_dict = graypy.handler.make_message_dict(
             record, self.debugging_fields, self.extra_fields, self.fqdn,
             self.localname, self.facility)
 
