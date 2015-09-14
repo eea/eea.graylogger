@@ -14,6 +14,7 @@
     <key name="facility" default=""/>
     <key name="exchange" default="logging.gelf"/>
     <key name="exchange_type" default="fanout"/>
+    <key name="instance_name" default=""/>
     <key name="format" default="%(message)s"
          datatype="ZConfig.components.logger.handlers.log_format"/>
   </sectiontype>

@@ -1,7 +1,39 @@
 """ ZConfig
 """
+import os
 import graypy
+import json
+import zlib
 from ZConfig.components.logger.handlers import HandlerFactory
+
+
+class EEAGELFHandler(graypy.GELFHandler):
+
+    def makePickle(self, record):
+        message_dict = graypy.handlers.make_message_dict(
+            record, self.debugging_fields, self.extra_fields, self.fqdn,
+            self.localname, self.facility)
+
+        instance_home = os.environ.get('INSTANCE_HOME', '')
+        if instance_home:
+            message_dict['instance_name'] = instance_home.split('/')[-1]
+
+        return zlib.compress(json.dumps(message_dict).encode('utf-8'))
+
+
+class EEAGELFRabbitHandler(graypy.GELFRabbitHandler):
+
+    def makePickle(self, record):
+        message_dict = graypy.handlers.make_message_dict(
+            record, self.debugging_fields, self.extra_fields, self.fqdn, self.localname,
+            self.facility)
+
+        instance_home = os.environ.get('INSTANCE_HOME', '')
+        if instance_home:
+            message_dict['instance_name'] = instance_home.split('/')[-1]
+
+        return json.dumps(message_dict)
+
 
 class GELFLoggerHandlerFactory(HandlerFactory):
     """ GELF logger
@@ -35,7 +67,7 @@ class GELFLoggerHandlerFactory(HandlerFactory):
             if self.section.chunk_size:
                 options['chunk_size'] = self.section.chunk_size
 
-            return graypy.GELFHandler(host, **options)
+            return EEAGELFHandler(host, **options)
 
         # GELFRabbitHandler
         else:
@@ -45,4 +77,5 @@ class GELFLoggerHandlerFactory(HandlerFactory):
             if self.section.exchange_type:
                 options['exchange_type'] = self.section.exchange_type
 
-            return graypy.GELFRabbitHandler(host, **options)
+            return EEAGELFRabbitHandler(host, **options)
+
