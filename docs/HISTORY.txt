@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.3.dev0 - (unreleased)
+-----------------------
+
 1.2 - (2015-10-05)
 ------------------
 * Bug fix: Instance name param added to graylog's log entry
