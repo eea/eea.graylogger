@@ -89,6 +89,7 @@ Dependencies
 
 1. Graylog_ server
 2. graypy_
+3. `plone.recipe.zope2instance`_ >= 4.2.17
 
 Source code
 ===========
@@ -121,3 +122,4 @@ EEA_ - European Environment Agency (EU)
 .. _`graypy`: https://pypi.python.org/pypi/graypy
 .. _`Graylog2 Docker image`: https://github.com/eea/eea.docker.graylog2
 .. _`eea.graylogger`: https://github.com/eea/eea.graylogger
+.. _`plone.recipe.zope2instance`: https://pypi.python.org/pypi/plone.recipe.zope2instance
