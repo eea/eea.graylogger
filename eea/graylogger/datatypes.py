@@ -1,9 +1,9 @@
 """ ZConfig
 """
 import os
-import graypy
 import json
 import zlib
+import graypy
 from ZConfig.components.logger.handlers import HandlerFactory
 
 
@@ -29,7 +29,7 @@ class EEAGELFRabbitHandler(graypy.GELFRabbitHandler):
 
     def makePickle(self, record):
         """ prepare message dict """
-        
+
         message_dict = graypy.handler.make_message_dict(
             record, self.debugging_fields, self.extra_fields, self.fqdn,
             self.localname, self.facility)
@@ -84,4 +84,3 @@ class GELFLoggerHandlerFactory(HandlerFactory):
                 options['exchange_type'] = self.section.exchange_type
 
             return EEAGELFRabbitHandler(host, **options)
-
