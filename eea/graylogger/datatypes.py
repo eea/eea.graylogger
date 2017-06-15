@@ -12,16 +12,23 @@ class EEAGELFHandler(graypy.GELFHandler):
 
     def makePickle(self, record):
         """ prepare message dict """
-
         message_dict = graypy.handler.make_message_dict(
-            record, self.debugging_fields, self.extra_fields, self.fqdn,
-            self.localname, self.facility)
+            record,
+            self.debugging_fields,
+            self.extra_fields,
+            self.fqdn,
+            self.localname,
+            True,
+            self.facility
+        )
 
         instance_home = os.environ.get('INSTANCE_HOME', '')
         if instance_home:
             message_dict['instance_name'] = instance_home.split('/')[-1]
 
-        return zlib.compress(json.dumps(message_dict).encode('utf-8'))
+        packed = graypy.handler.message_to_pickle(message_dict)
+        frame = zlib.compress(packed) if self.compress else packed
+        return frame
 
 
 class EEAGELFRabbitHandler(graypy.GELFRabbitHandler):
@@ -31,8 +38,14 @@ class EEAGELFRabbitHandler(graypy.GELFRabbitHandler):
         """ prepare message dict """
 
         message_dict = graypy.handler.make_message_dict(
-            record, self.debugging_fields, self.extra_fields, self.fqdn,
-            self.localname, self.facility)
+            record,
+            self.debugging_fields,
+            self.extra_fields,
+            self.fqdn,
+            self.localname,
+            True,
+            self.facility
+        )
 
         instance_home = os.environ.get('INSTANCE_HOME', '')
         if instance_home:
