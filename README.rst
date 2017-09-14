@@ -1,10 +1,8 @@
 ==============
 EEA Graylogger
 ==============
-.. image:: http://ci.eionet.europa.eu/job/eea.graylogger-www/badge/icon
-  :target: http://ci.eionet.europa.eu/job/eea.graylogger-www/lastBuild
-.. image:: http://ci.eionet.europa.eu/job/eea.graylogger-plone4/badge/icon
-  :target: http://ci.eionet.europa.eu/job/eea.graylogger-plone4/lastBuild
+.. image:: http://ci.eionet.europa.eu/job/eea/job/eea.graylogger/job/master/badge/icon
+  :target: http://ci.eionet.europa.eu/job/eea/job/eea.graylogger/job/master/display/redirect
 
 GELF (Graylog Extended Log Format) for Zope event logs
 
