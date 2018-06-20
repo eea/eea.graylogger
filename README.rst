@@ -119,7 +119,7 @@ Funding
 
 EEA_ - European Environment Agency (EU)
 
-.. _`EEA`: http://www.eea.europa.eu/
+.. _`EEA`: https://www.eea.europa.eu/
 .. _`Graylog`: https://www.graylog.org
 .. _`graypy`: https://pypi.python.org/pypi/graypy
 .. _`Graylog2 Docker image`: https://github.com/eea/eea.docker.graylog2
