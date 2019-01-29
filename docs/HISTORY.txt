@@ -1,8 +1,15 @@
 Changelog
 =========
 
-1.6.dev0 - (unreleased)
+1.7 - (2019-01-28)
 -----------------------
+* Jenkins: Add sonarqube step
+  [avoinea refs #101552]
+* Change: updated URLs pointing to eea.europa.eu with https://
+  [alecghica refs #95849]
+
+1.6 - (2017-12-12)
+------------------
 * Change: Replace eeacms/zptlint with eeacms/plone-test:4 zptlint
   [avoinea refs #90415]
 
