@@ -39,7 +39,7 @@ setup(name=NAME,
           'setuptools',
           # -*- Extra requirements: -*-
           'amqplib',
-          "graypy>=0.2.14",
+          "graypy==0.2.14",
       ],
       entry_points="""
       # -*- entry_points -*-
