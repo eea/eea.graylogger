@@ -75,7 +75,7 @@ GELFRabbitHandler
 -----------------
 
 * **server** - RabbitMQ URL (ex: amqp://guest:guest@localhost:5672/%2F).
-* **exchange** - RabbitMQ exchange. Default ‘logging.gelf’. A queue binding must
+* **exchange** - RabbitMQ exchange. Default `logging.gelf`. A queue binding must
   be defined on the server to prevent log messages from being dropped.
 * **debugging_fields** - send debug fields if true (the default).
 * **extra_fields** - send extra fields on the log record to graylog if true (the default).

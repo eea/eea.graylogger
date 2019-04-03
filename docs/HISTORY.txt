@@ -3,6 +3,10 @@ Changelog
 
 1.8 - (2019-04-02)
 ---------------------
+* Bug fix: Fix Readme unicode/decode error
+  [avoinea]
+* Bug fix: Pin graypy version
+  [valipod]
 
 1.7 - (2019-01-28)
 -----------------------
