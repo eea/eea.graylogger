@@ -12,6 +12,8 @@
     <key name="fqdn" default="no" datatype="boolean"/>
     <key name="localname" default=""/>
     <key name="facility" default=""/>
+    <key name="level_names" default="yes" datatype="boolean"/>
+    <key name="compress" default="yes" datatype="boolean"/>
     <key name="exchange" default="logging.gelf"/>
     <key name="exchange_type" default="fanout"/>
     <key name="instance_name" default=""/>
