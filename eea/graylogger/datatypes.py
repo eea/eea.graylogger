@@ -93,9 +93,6 @@ class GELFLoggerHandlerFactory(HandlerFactory):
             if port:
                 options['port'] = port
 
-            if self.section.chunk_size:
-                options['chunk_size'] = self.section.chunk_size
-
             return EEAGELFHandler(host, **options)
 
         # GELFRabbitHandler

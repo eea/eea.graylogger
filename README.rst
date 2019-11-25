@@ -101,8 +101,6 @@ GELFHandler
 -----------
 
 * **server** - the host[:port] of the graylog server.
-* **chunk_size** - message chunk size. messages larger than this size will be sent
-  to graylog in multiple chunks (default 1420).
 * **debugging_fields** - send debug fields if true (the default).
 * **extra_fields** - send extra fields on the log record to graylog if true (the default).
 * **fqdn** - use fully qualified domain name of localhost as source host (socket.getfqdn()).

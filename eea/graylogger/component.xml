@@ -6,7 +6,6 @@
                extends="ZConfig.logger.base-log-handler">
     <key name="rabbit" default="no" datatype="boolean"/>
     <key name="server" default="localhost" datatype="inet-address"/>
-    <key name="chunk_size" default="1420" datatype="integer"/>
     <key name="debugging_fields" default="yes" datatype="boolean"/>
     <key name="extra_fields" default="yes" datatype="boolean"/>
     <key name="fqdn" default="no" datatype="boolean"/>
