@@ -12,23 +12,17 @@ setup(name=NAME,
       description="GELF (Graylog Extended Log Format) for Zope",
       long_description=(open("README.rst").read() + "\n" +
                         open(os.path.join("docs", "HISTORY.txt")).read()),
-      long_description_content_type="text/x-rst",
       # https://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
+          "Framework :: Zope2",
+          "Framework :: Plone",
           "Framework :: Plone :: 4.0",
           "Framework :: Plone :: 4.1",
           "Framework :: Plone :: 4.2",
           "Framework :: Plone :: 4.3",
-          "Framework :: Plone :: 5.1",
-          "Framework :: Plone :: 5.2",
-          "Framework :: Plone :: Addon",
-          "Framework :: Zope :: 2",
-          "Framework :: Zope :: 4",
-          "Framework :: Zope",
-          "Programming Language :: Python :: 2.7",
-          "Programming Language :: Python :: 3.6",
-          "Programming Language :: Python :: 3.7",
+          "Programming Language :: Zope",
           "Programming Language :: Python",
+          "Programming Language :: Python :: 2.7",
           "Topic :: Software Development :: Libraries :: Python Modules",
           "License :: OSI Approved :: GNU General Public License (GPL)",
       ],
@@ -43,12 +37,10 @@ setup(name=NAME,
       zip_safe=False,
       install_requires=[
           'setuptools',
+          # -*- Extra requirements: -*-
           'amqplib',
           "graypy==0.2.14",
       ],
-      extras_require={
-        'test': ['plone.app.testing']
-      },
       entry_points="""
       # -*- entry_points -*-
       [z3c.autoinclude.plugin]

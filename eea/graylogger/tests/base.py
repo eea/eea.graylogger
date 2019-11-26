@@ -1,21 +1,23 @@
 """ Testing
 """
-from Products.CMFPlone import setuphandlers
 from plone.testing import z2
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
-from plone.app.testing import applyProfile
 from plone.app.testing import PloneSandboxLayer
+from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import FunctionalTesting
 
 class EEAFixture(PloneSandboxLayer):
     """ EEA Testing Policy
     """
+    defaultBases = (PLONE_FIXTURE,)
+
     def setUpZope(self, app, configurationContext):
         """ Setup Zope
         """
 
         import eea.graylogger
+
         self.loadZCML(package=eea.graylogger)
         z2.installProduct(app, 'eea.graylogger')
 
@@ -27,19 +29,10 @@ class EEAFixture(PloneSandboxLayer):
     def setUpPloneSite(self, portal):
         """ Setup Plone
         """
-        # Default workflow
-        wftool = portal['portal_workflow']
-        wftool.setDefaultChain('simple_publication_workflow')
+        # self.applyProfile(portal, 'eea.graylogger:default')
 
         # Login as manager
         setRoles(portal, TEST_USER_ID, ['Manager'])
-
-        # Add default Plone content
-        try:
-            applyProfile(portal, 'plone.app.contenttypes:plone-content')
-        except KeyError:
-            # BBB Plone 4
-            setuphandlers.setupPortalContent(portal)
 
         # Create testing environment
         portal.invokeFactory("Folder", "sandbox", title="Sandbox")

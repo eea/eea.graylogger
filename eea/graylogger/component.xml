@@ -6,13 +6,12 @@
                extends="ZConfig.logger.base-log-handler">
     <key name="rabbit" default="no" datatype="boolean"/>
     <key name="server" default="localhost" datatype="inet-address"/>
+    <key name="chunk_size" default="1420" datatype="integer"/>
     <key name="debugging_fields" default="yes" datatype="boolean"/>
     <key name="extra_fields" default="yes" datatype="boolean"/>
     <key name="fqdn" default="no" datatype="boolean"/>
     <key name="localname" default=""/>
     <key name="facility" default=""/>
-    <key name="level_names" default="yes" datatype="boolean"/>
-    <key name="compress" default="yes" datatype="boolean"/>
     <key name="exchange" default="logging.gelf"/>
     <key name="exchange_type" default="fanout"/>
     <key name="instance_name" default=""/>
