@@ -1,8 +1,14 @@
 Changelog
 =========
 
-2.0-dev0 - (unreleased)
+2.0 - (2019-11-25)
 ---------------------
+* Feature: Python3 / Plone 5.2 / WSGI support
+  [avoinea refs #110157]
+* Change: Upgrade to graypy 2.1.0
+  [avoinea refs #110157]
+* Change: Remove chunk_size option
+  [avoinea refs #110157]
 
 1.9 - (2019-04-02)
 ------------------
