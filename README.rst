@@ -26,6 +26,45 @@ Main features
 Install
 =======
 
+Plone 5.2+ (WSGI)
+-----------------
+
+- Add `eea.graylogger`_ to your eggs section in your buildout and re-run buildout
+
+  ::
+
+    [instance]
+    eggs +=
+        eea.graylogger
+
+    event-log-handler = eea.graylogger.GELFHandler
+    event-log-args = ('logs.example.com', 12201)
+    event-log-kwargs = {'level_names': True, 'facility': 'example.com'}
+
+    access-log-handler = eea.graylogger.GELFHandler
+    access-log-args = ('logs.example.com', 12201)
+    access-log-kwargs = {'facility': 'example.com'}
+
+See `graypy`_ documentation for more details.
+
+Alternatively, you can skip `-log-args` and `-log-kwargs` and use environment variables to
+define Graylog `host:port` and `facility`:
+
+  ::
+
+    [instance]
+    eggs +=
+        eea.graylogger
+
+    event-log-handler = eea.graylogger.GELFHandler
+    access-log-handler = eea.graylogger.GELFHandler
+
+* `GRAYLOG` - Graylog `host`, or `host:port` (e.g.: `GRAYLOG=logs.example.com:12201`)
+* `GRAYLOG_FACILITY` - Graylog facility (e.g.: `GRAYLOG_FACILITY=example.com`)
+
+Plone < 5.2 (non-WSGI)
+----------------------
+
 - Add `eea.graylogger`_ to your eggs section in your buildout and re-run buildout.
   You can download a sample buildout from
   https://github.com/eea/eea.graylogger/tree/master/buildouts/plone4
@@ -62,8 +101,6 @@ GELFHandler
 -----------
 
 * **server** - the host[:port] of the graylog server.
-* **chunk_size** - message chunk size. messages larger than this size will be sent
-  to graylog in multiple chunks (default 1420).
 * **debugging_fields** - send debug fields if true (the default).
 * **extra_fields** - send extra fields on the log record to graylog if true (the default).
 * **fqdn** - use fully qualified domain name of localhost as source host (socket.getfqdn()).
@@ -90,13 +127,13 @@ Dependencies
 ============
 
 1. Graylog_ server
-2. graypy_
-3. `plone.recipe.zope2instance`_ >= 4.2.17
+2. graypy_ >= 2.1.0
+3. `plone.recipe.zope2instance`_ >= 6.5.0
 
 Source code
 ===========
 
-- Latest source code (Plone 4 compatible):
+- Latest source code (Plone 5 / Python 3 compatible):
   https://github.com/eea/eea.graylogger
 
 
@@ -121,7 +158,7 @@ EEA_ - European Environment Agency (EU)
 
 .. _`EEA`: https://www.eea.europa.eu/
 .. _`Graylog`: https://www.graylog.org
-.. _`graypy`: https://pypi.python.org/pypi/graypy
+.. _`graypy`: https://pypi.org/project/graypy/
 .. _`Graylog2 Docker image`: https://github.com/eea/eea.docker.graylog2
 .. _`eea.graylogger`: https://github.com/eea/eea.graylogger
-.. _`plone.recipe.zope2instance`: https://pypi.python.org/pypi/plone.recipe.zope2instance
+.. _`plone.recipe.zope2instance`: https://pypi.org/project/plone.recipe.zope2instance

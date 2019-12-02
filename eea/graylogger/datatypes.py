@@ -7,50 +7,54 @@ import graypy
 from ZConfig.components.logger.handlers import HandlerFactory
 
 
-class EEAGELFHandler(graypy.GELFHandler):
+class EEAGELFHandler(graypy.GELFUDPHandler):
     """ Graylog Extended Log Format handler """
+
+    def __init__(self, host='', port=12201, **kwargs):
+        if not host:
+            host = os.environ.get("GRAYLOG", "localhost")
+
+        if ':' in host:
+            host, port = host.split(":")[:2]
+
+        try:
+            port = int(port)
+        except ValueError:
+            port = 12201
+
+        if not kwargs.get('facility'):
+            kwargs['facility'] = os.environ.get('GRAYLOG_FACILITY', None)
+
+        super(EEAGELFHandler, self).__init__(host, port, **kwargs)
 
     def makePickle(self, record):
         """ prepare message dict """
-        message_dict = graypy.handler.make_message_dict(
-            record,
-            self.debugging_fields,
-            self.extra_fields,
-            self.fqdn,
-            self.localname,
-            True,
-            self.facility
-        )
 
+        gelf_dict = self._make_gelf_dict(record)
         instance_home = os.environ.get('INSTANCE_HOME', '')
         if instance_home:
-            message_dict['instance_name'] = instance_home.split('/')[-1]
-
-        packed = graypy.handler.message_to_pickle(message_dict)
-        frame = zlib.compress(packed) if self.compress else packed
-        return frame
+            gelf_dict['instance_name'] = instance_home.split('/')[-1]
+        packed = self._pack_gelf_dict(gelf_dict)
+        pickle = zlib.compress(packed) if self.compress else packed
+        return pickle
 
 
 class EEAGELFRabbitHandler(graypy.GELFRabbitHandler):
     """ RabbitMQ / Graylog Extended Log Format handler """
 
+    def __init__(self, url='', **kwargs):
+        if not url:
+            url = os.environ.get("GRAYLOG", "localhost")
+        if not kwargs.get('facility'):
+            kwargs['facility'] = os.environ.get('GRAYLOG_FACILITY', None)
+        super(EEAGELFRabbitHandler, self).__init__(url, **kwargs)
+
     def makePickle(self, record):
         """ prepare message dict """
-
-        message_dict = graypy.handler.make_message_dict(
-            record,
-            self.debugging_fields,
-            self.extra_fields,
-            self.fqdn,
-            self.localname,
-            True,
-            self.facility
-        )
-
+        message_dict = self._make_gelf_dict(record)
         instance_home = os.environ.get('INSTANCE_HOME', '')
         if instance_home:
             message_dict['instance_name'] = instance_home.split('/')[-1]
-
         return json.dumps(message_dict)
 
 
@@ -78,13 +82,16 @@ class GELFLoggerHandlerFactory(HandlerFactory):
         if self.section.facility:
             options['facility'] = self.section.facility
 
+        if self.section.level_names:
+            options['level_names'] = self.section.level_names
+
+        if self.section.compress:
+            options['compress'] = self.section.compress
+
         # GELFHandler
         if not self.section.rabbit:
             if port:
                 options['port'] = port
-
-            if self.section.chunk_size:
-                options['chunk_size'] = self.section.chunk_size
 
             return EEAGELFHandler(host, **options)
 
