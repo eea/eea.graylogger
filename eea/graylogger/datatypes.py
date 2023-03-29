@@ -4,12 +4,8 @@ import os
 import json
 import zlib
 import graypy
-import logging
 from io import UnsupportedOperation
 from ZConfig.components.logger.handlers import HandlerFactory
-
-
-logger = logging.getLogger("eea.graylogger")
 
 
 class EEAGELFHandler(graypy.GELFUDPHandler):
