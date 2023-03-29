@@ -5,6 +5,7 @@ import json
 import zlib
 import graypy
 import logging
+from io import UnsupportedOperation
 from ZConfig.components.logger.handlers import HandlerFactory
 
 
@@ -21,8 +22,8 @@ class EEAGELFHandler(graypy.GELFUDPHandler):
         try:
             if ':' in host:
                 host, port = host.split(":")[:2]
-        except:
-            host = os.environ.get("GRAYLOG", "localhost")
+        except UnsupportedOperation:
+            host, port = os.environ.get("GRAYLOG", "localhost").split(":")[:2]
 
         try:
             port = int(port)
@@ -31,9 +32,7 @@ class EEAGELFHandler(graypy.GELFUDPHandler):
 
         if not kwargs.get('facility'):
             kwargs['facility'] = os.environ.get('GRAYLOG_FACILITY', None)
-        kwargs['facility'] = "demo-climate-advisory-board.devel4cph.eea.europa.eu"
-        host = "logcentral.eea.europa.eu"
-        port = 12201
+
         super(EEAGELFHandler, self).__init__(host, port, **kwargs)
 
     def makePickle(self, record):
@@ -45,9 +44,7 @@ class EEAGELFHandler(graypy.GELFUDPHandler):
             gelf_dict['instance_name'] = instance_home.split('/')[-1]
         packed = self._pack_gelf_dict(gelf_dict)
         pickle = zlib.compress(packed) if self.compress else packed
-        logger.info(gelf_dict)
-        logger.info(packed)
-        logger.info(pickle)
+
         return pickle
 
 
@@ -116,9 +113,3 @@ class GELFLoggerHandlerFactory(HandlerFactory):
                 options['exchange_type'] = self.section.exchange_type
 
             return EEAGELFRabbitHandler(host, **options)
-
-# modify graypy rabbitmq:L11
-# change zope.ini
-# add eea.graylogger, amqp to requirements.txt
-# modify datatypes.py in eea.graylogger
-
