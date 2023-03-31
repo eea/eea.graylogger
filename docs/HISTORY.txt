@@ -3,6 +3,8 @@ Changelog
 
 2.1-dev0 - (unreleased)
 ---------------------------
+* Change: Bypass Plone 6 error when using eea.graylogger
+  [iulianpetchesi refs #249331]
 
 2.0 - (2019-11-25)
 --------------------------
