@@ -43,8 +43,8 @@ setup(name=NAME,
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'amqplib',
-          "graypy >= 2.1.0",
+          'amqp',
+          "graypy >= 2.0.0",
       ],
       extras_require={
         'test': ['plone.app.testing']

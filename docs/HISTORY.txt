@@ -3,6 +3,8 @@ Changelog
 
 2.2-dev0 - (unreleased)
 ---------------------------
+* Change: Remove deprecated amqplib dependency from setup.py
+  [iulianpetchesi refs #249331]
 
 2.1 - (2023-03-31)
 ---------------------------
