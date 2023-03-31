@@ -4,6 +4,7 @@ import os
 import json
 import zlib
 import graypy
+from io import UnsupportedOperation
 from ZConfig.components.logger.handlers import HandlerFactory
 
 
@@ -14,8 +15,14 @@ class EEAGELFHandler(graypy.GELFUDPHandler):
         if not host:
             host = os.environ.get("GRAYLOG", "localhost")
 
-        if ':' in host:
-            host, port = host.split(":")[:2]
+        try:
+            if ':' in host:
+                host, port = host.split(":")[:2]
+        except UnsupportedOperation:
+            if ':' in os.environ.get("GRAYLOG", "localhost"):
+                host, port = os.environ.get("GRAYLOG", "localhost").split(":")[:2]
+            else:
+                host = os.environ.get("GRAYLOG", "localhost")
 
         try:
             port = int(port)
@@ -36,6 +43,7 @@ class EEAGELFHandler(graypy.GELFUDPHandler):
             gelf_dict['instance_name'] = instance_home.split('/')[-1]
         packed = self._pack_gelf_dict(gelf_dict)
         pickle = zlib.compress(packed) if self.compress else packed
+
         return pickle
 
 
