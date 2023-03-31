@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.2 - (2023-03-31)
+---------------------------
+* Change: Change setup.py version pinnings
+  [iulianpetchesi refs #249331]
+
 2.1 - (2023-03-31)
 ---------------------------
 * Change: Bypass Plone 6 error when using eea.graylogger
