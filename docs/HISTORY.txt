@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.3 - (2023-03-31)
+---------------------------
+* Change: Remove graypy pin
+  [iulianpetchesi refs #249331]
+
 2.2 - (2023-03-31)
 ---------------------------
 * Change: Change setup.py version pinnings
