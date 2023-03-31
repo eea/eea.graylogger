@@ -19,7 +19,10 @@ class EEAGELFHandler(graypy.GELFUDPHandler):
             if ':' in host:
                 host, port = host.split(":")[:2]
         except UnsupportedOperation:
-            host, port = os.environ.get("GRAYLOG", "localhost").split(":")[:2]
+            if ':' in os.environ.get("GRAYLOG", "localhost"):
+                host, port = os.environ.get("GRAYLOG", "localhost").split(":")[:2]
+            else:
+                host = os.environ.get("GRAYLOG", "localhost")
 
         try:
             port = int(port)
