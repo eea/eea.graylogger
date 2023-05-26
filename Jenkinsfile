@@ -3,7 +3,7 @@ pipeline {
 
   environment {
         GIT_NAME = "eea.graylogger"
-        SONARQUBE_TAGS = "www.eea.europa.eu,climate-advisory-board.europa.eu"
+        SONARQUBE_TAGS = "www.eea.europa.eu,climate-advisory-board.europa.eu,forest.eea.europa.eu"
     }
 
   stages {
