@@ -3,7 +3,7 @@ pipeline {
 
   environment {
         GIT_NAME = "eea.graylogger"
-        SONARQUBE_TAGS = "www.eea.europa.eu"
+        SONARQUBE_TAGS = "www.eea.europa.eu,climate-advisory-board.europa.eu,demo-www.eea.europa.eu,forest.eea.europa.eu,www.eea.europa.eu-en"
     }
 
   stages {
@@ -130,13 +130,13 @@ pipeline {
 
           "Plone5": {
             node(label: 'docker') {
-              sh '''docker run -i --rm --name="$BUILD_TAG-plone5" -e GIT_BRANCH="$BRANCH_NAME" -e ADDONS="$GIT_NAME" -e DEVELOP="src/$GIT_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/plone-test:5 -v -vv -s $GIT_NAME'''
+              sh '''docker pull eeacms/plone-test:5; docker run -i --rm --name="$BUILD_TAG-plone5" -e GIT_BRANCH="$BRANCH_NAME" -e ADDONS="$GIT_NAME" -e DEVELOP="src/$GIT_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/plone-test:5 -v -vv -s $GIT_NAME'''
             }
           },
 
           "Python3": {
             node(label: 'docker') {
-              sh '''docker run -i --rm --name="$BUILD_TAG-python3" -e GIT_BRANCH="$BRANCH_NAME" -e ADDONS="$GIT_NAME" -e DEVELOP="src/$GIT_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/plone-test:5-python3 -v -vv -s $GIT_NAME'''
+              sh '''docker pull eeacms/plone-test:5-python3; docker run -i --rm --name="$BUILD_TAG-python3" -e GIT_BRANCH="$BRANCH_NAME" -e ADDONS="$GIT_NAME" -e DEVELOP="src/$GIT_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/plone-test:5-python3 -v -vv -s $GIT_NAME'''
             }
           }
         )
