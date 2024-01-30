@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.5-dev0 - (unreleased)
+---------------------------
+* Bug fix: add dependency to amqp
+  [valipod refs #161113]
+
 2.4 - (2023-06-12)
 ---------------------------
 * Bug fix: Fix tests
