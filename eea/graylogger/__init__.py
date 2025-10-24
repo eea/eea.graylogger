@@ -1,5 +1,5 @@
-""" Main product initializer
-"""
+"""Main product initializer"""
+
 from eea.graylogger.datatypes import EEAGELFHandler as GELFHandler
 from eea.graylogger.datatypes import EEAGELFRabbitHandler as GELFRabbitHandler
 
