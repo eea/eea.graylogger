@@ -7,6 +7,8 @@ Changelog
   [mihaidobrescu1111 = refs #286821]
 * Bug fix: add dependency to amqp
   [valipod refs #161113]
+* Change: Add plone6 tests
+  [mihaidobrescu1111 = refs #293593]
 
 2.4 - (2023-06-12)
 ---------------------------
